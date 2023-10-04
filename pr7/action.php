@@ -20,7 +20,24 @@
     echo 'Здравствуйте, '.htmlspecialchars($_POST['login']).'. <br>';
     echo 'Вы зарегистрированы';
 
+    $host       = "db4.myarena.ru";      // Адрес сервера базы данных
+    $dbname     = "u19978_a09";    // Имя базы данных
+    $user       = "u19978_a09";           // Имя пользователя
+    $password   = "I1w6G5a9I0";               // Пароль
 
+    try {
+        $connection = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $user, $password);
+
+        
+    } catch (\Throwable $th) {
+        echo "Ошибка подключения"; return;
+    }
+    /* Подготовленный запрос, шаг 1: подготовка */
+    $stmt = $connection ->prepare("INSERT INTO `users`(`id`, `email`, `login`, `password`) VALUES (?, ?, ?, ?)");
+
+    /* Подготовленный запрос, шаг 2: связывание и выполнение */
+    $stmt->bind_param("is", $_POST['email'], $_POST['login'], $_POST['password']);
+    $stmt->execute();
     ?>
 
 </body>
