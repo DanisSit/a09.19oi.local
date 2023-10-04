@@ -27,17 +27,13 @@
 
     try {
         $connection = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $user, $password);
-
-        
     } catch (\Throwable $th) {
         echo "Ошибка подключения"; return;
     }
-    /* Подготовленный запрос, шаг 1: подготовка */
-    $stmt = $connection ->prepare("INSERT INTO `users`(`id`, `email`, `login`, `password`) VALUES (?, ?, ?, ?)");
+    $stmt = $connection->prepare("INSERT INTO users (id, email, 'login', 'password') VALUES (:value1, :value2, :value3, :value4)");
+    $stmt->bindParam(':value1', $value1);
+    $stmt->bindParam(':value2', $value2);
 
-    /* Подготовленный запрос, шаг 2: связывание и выполнение */
-    $stmt->bind_param("is", $_POST['email'], $_POST['login'], $_POST['password']);
-    $stmt->execute();
     ?>
 
 </body>
