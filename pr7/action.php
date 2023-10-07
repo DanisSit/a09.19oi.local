@@ -17,8 +17,7 @@
     if(empty($_POST['password-repeat'])) exit('Пароль не введён повторно');
     if($_POST['password'] !== $_POST['password-repeat']) exit('Пароли не совпадают');
 
-    echo 'Здравствуйте, '.htmlspecialchars($_POST['login']).'. <br>';
-    echo 'Вы зарегистрированы';
+    
 
     $host       = "db4.myarena.ru";      // Адрес сервера базы данных
     $dbname     = "u19978_a09";    // Имя базы данных
@@ -30,9 +29,37 @@
     } catch (\Throwable $th) {
         echo "Ошибка подключения"; return;
     }
-    $stmt = $connection->prepare("INSERT INTO users (id, email, 'login', 'password') VALUES (:value1, :value2, :value3, :value4)");
-    $stmt->bindParam(':value1', $value1);
-    $stmt->bindParam(':value2', $value2);
+
+    $select = $connection->prepare( "SELECT COUNT(`id`) as cnt FROM `users` WHERE `login` = ? OR `email` = ?;" ); 
+    $res = $select->execute([ $_POST['login'],$_POST['email'] ] );
+    $row = $select->fetch();
+
+    if(!$res ){
+        exit( 'Ошибка регистрации...');
+    }
+
+    if( $res && isset($row['cnt']) && $row[0] > 0 ){
+    exit( 'Ошибка регистрации... (Пользователь уже существует)' );
+    }
+
+    $email = $_POST['email'];
+    $login = $_POST['login'];
+    $pass = $_POST['password'];
+    $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
+
+    $stmt = $connection->prepare("INSERT INTO `users` (email, login, password) VALUES (:email, :log, :pass)");
+
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':log', $login);
+    $stmt->bindParam(':pass', $pass_hash);
+
+    if ($stmt->execute()) {
+        echo 'Здравствуйте, '.$login.'. <br>';
+        echo 'Вы зарегистрированы';
+        } 
+        else {
+        echo "Ошибка при выполнении запроса";
+        }
 
     ?>
 
