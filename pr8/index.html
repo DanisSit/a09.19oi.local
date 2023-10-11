@@ -7,12 +7,31 @@
     <title>форма</title>
 </head>
 <body>
+    <style>
+        .box{
+            background-color: rgb(226, 226, 226);
+            width: 40%;
+            margin: auto;
+            padding: 1em;
+            align-items: center;
+            text-align: center;
+            border-radius: 2em;
+        }
+        .butn{
+            border-radius: 10px;
+            background-color: rgb(82, 148, 17);
+            color: white;
+            margin: auto;
+            padding: 10px;
+            text-decoration: none;
+        }
+    </style>
+    <div class="box">
+        <h1>Авторизация</h1>
     <form action="./action.php" method="post">
-        <p>Почта: <input type="email" name="email" required> </p>
-        <p>Логин: <input type="text" name="login" required></p>
-        <p>Пароль: <input type="password" name="password" required></p>
-        <p>Подтверждение пароля: <input type="password" name="password-repeat" required></p>
-        <p><input type="submit"></p> 
-        </form>
+        <p><input type="text" name="login" placeholder="Логин" required></p>
+        <p><input type="password" name="password" placeholder="Пароль" required></p>
+        <p><input type="button" class="butn" value="Войти"></p>
+        </form></div>
 </body>
 </html>
