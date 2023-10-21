@@ -1,8 +1,6 @@
 let string = Number(prompt('Введите шестизначное число'));
 
-if (string.length < 6) {
-    console.log(ошибка);
-} else {
+if (string.length == 6) {
     let a = string[0];
     let b = string[1];
     let c = string[2];
@@ -16,4 +14,6 @@ if (string.length < 6) {
     } else {
         console.log(a, '+', b, '+', c, '=', a1, '+', b1, '+', c1, '\n', 'Нет');
     }
+} else {
+    console.log(ошибка);
 }
