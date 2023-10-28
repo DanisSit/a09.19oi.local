@@ -1,4 +1,4 @@
-let string = Number(prompt('Введите шестизначное число'));
+let string = prompt('Введите шестизначное число');
 
 if (string.length == 6) {
     let a = string[0];
