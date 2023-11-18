@@ -9,11 +9,9 @@ if (string.length == 6) {
     let c1 = string[5];
     let result = +a + +b + +c;
     let result1 = +a1 + +b1 + +c1;
-    if (result == result1) {
-        console.log(a, '+', b, '+', c, '=', a1, '+', b1, '+', c1, '\n', 'Да');
-    } else {
-        console.log(a, '+', b, '+', c, '=', a1, '+', b1, '+', c1, '\n', 'Нет');
-    }
+    
+    console.log(a, '+', b, '+', c, '=', a1, '+', b1, '+', c1, '\n', (result == result1) ? 'Да' : 'HET');
+
 } else {
     console.log(ошибка);
 }
