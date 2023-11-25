@@ -7,8 +7,12 @@ let content = [
     'Sed ultricies mauris quam, vel feugiat leo iaculis vitae. Donec nulla ex, maximus ac dapibus posuere, sagittis at nisi.'
 ];
 function showContent() {
+  const $header = document.createElement('h2');
+  const $text = document.createTextNode('Lorem ipsum');
+  $header.append($text);
+  document.body.append($header);
 
-    var temp, item, item1, a, b, i;
+    var temp, item, item1, item2, a, b, i;
     temp = document.getElementsByTagName("template")[0];
     item = temp.content.querySelector("h3");
     item1 = temp.content.querySelector("p");
